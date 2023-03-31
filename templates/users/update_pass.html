@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{%block content%}
+{% include 'includes/header.html' %}
+<h2>Cambiar contraseña</h2>
+<div class="grid-container">
+    <form method="POST">{%csrf_token%}
+        {{form.as_p}}
+        <button class="submit success button">reset</button>
+    </form>
+</div>
+
+
+{%endblock content%}
+

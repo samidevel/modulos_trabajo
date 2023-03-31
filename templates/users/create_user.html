@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{%include 'includes/header.html'%}
+
+<div class="grid-container"><br>
+    <h1>Registro de Usuarios</h1>
+    <form method="POST">{%csrf_token%}
+        {{form.as_p}}
+        <button class="submit success button">Guardar</button>
+    </form>
+    
+</div>
+
+{%endblock content%}

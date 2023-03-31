@@ -1,0 +1,44 @@
+
+<div class="top-bar">
+    <div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li class="menu-text">Base de empleados</li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'empleados_app:listar_empleados' %}">Buscar empleados</a></li>
+        
+        <li>
+            <a href="#">Directorios de Catts</a>
+            <ul class="menu vertical">
+              <li><a href="#">san antonio</a></li>
+              <li><a href="#">bogota</a></li>
+              <li><a href="#">medellin</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Administrador</a>
+            <ul class="menu vertical">
+              <li><a href="{% url 'users_app:list_users' %}">Listado de usuarios</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Mi Perfil</a>
+            <ul class="menu-vertical">
+              <li><a href="{% url 'users_app:change_password' %}">Cambiar contraseña</a></li>
+              <li><a href="{% url 'users_app:reset_password' %}">Restablecer contraseña</a></li>
+              <li><a href="{% url 'users_app:turnos_view' %}">Mis Turnos</a></li>
+            </ul>
+          </li>
+         
+          <li><a href="{% url 'users_app:logout' %}">Cerrar session</a></li>
+         
+         {%else%}
+         
+            
+        
+        {%endif%}
+      </div>
+      <a class ="success  button" href="{% url 'users_app:login_user' %}">{{user}}</a>
+      
+    
+      </div>
+    </div>

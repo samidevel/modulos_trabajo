@@ -1,0 +1,15 @@
+
+<h2>Base de empleados tuya</h2>
+<form method="GET">
+    <input type="text" id="kward" name="kward" placeholder="ingrese cedula">{%csrf_token%}
+    <button type="submit">Buscar</button>
+</form>
+
+
+<h3>Listado de empleados</h3>
+
+{%for en in empleados%}
+<ul>
+    <li>{{en.name}}</li>
+</ul>
+{%endfor%}

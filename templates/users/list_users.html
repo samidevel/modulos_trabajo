@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{%include 'includes/header.html'%}
+
+
+<div class="grid-container">
+    <h1>Listado de usuarios</h1>
+    <table>
+        <thead>
+          <tr>
+            <th width="100" heigth="50" >Usuario</th>
+            <th width="100" heigth="50">Nombres</th>
+            <th width="100" heigth="50">proyecto</th>
+            <th width="100" heigth="50">Administrador</th>  
+            <th width="100" heigth="50">Estado</th>
+            <th width="100" heigth="50">Permisos</th>
+            <th width="100" heigth="50">Accion</th>
+            
+          
+          </tr>
+        </thead>
+        <tbody>
+
+            {%for u in listuser%}
+          <tr>
+            <td>{{u.username}}</td>
+            <td>{{u.get_full_name}}</td>
+            <td>{{u.proyecto}}</td>
+            <td>{{u.is_staff}}</td>
+            
+            <td>
+              {%if u.is_active%}
+                <span class="label success">activo</span>
+                {%else%}
+                <span class="label alert">Inactivo</span>
+              {%endif%}
+              
+            </td>
+            <td>{{u.get_ocupation_display}}</td>
+            
+            <td>
+              <a href="{% url 'users_app:user_update' u.pk %}" class="button warning">Editar</a>
+            </td>
+          </tr>
+          {%endfor%}
+
+        </tbody>
+
+      </table>
+    
+       <div class="cell">
+            <a href="{% url 'users_app:create_users'  %}" class="button expanded">Agregar Nuevo Usuario</a>
+       </div>
+       
+    </ul>
+</div>
+
+{%endblock content%}

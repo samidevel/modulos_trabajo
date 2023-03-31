@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{%block content%}
+{%include 'includes/header.html'%}  
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Consultar empleado</h1>
+        <form class="cell grid-x grid-margin-x" method="GET" >{%csrf_token%}
+            <div class="cell large-7">
+                <input type="text" id="kward" name="kward" placeholder="Buscar empleado">
+            </div>
+            <div class="cell large-2">
+                <button type="submit" class="success button">Consultar</button>
+            </form>
+        </div>
+        <div class="cell">
+            <table>
+                <thead>
+                  <tr>
+                    <th width="200">cedula</th>
+                    <th>nombres</th>
+                    <th width="150">Departamento</th>
+                    <th width="150">Fecha de ingreso</th>
+                    <th width="150">Fondo de pensiones</th>
+                    <th width="150">Eps</th>
+                    <th width="150">Telefono</th> 
+                    <th width="150">Caja de compensaciones</th> 
+                    <th width="150">Ciudad de trabajo</th> 
+                    <th width="150">Genero</th>
+                    <th width="150">Tipo de sangre</th>
+                    <th width="150">Factor RH</th>
+                    <th width="150">Cargo</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for empleados in object_list %}
+                  <tr>
+                    <td>{{empleados.identification}}</td>
+                    <td>{{empleados.name}}</td>
+                    <td>{{empleados.departamento}}</td>
+                    <td>{{empleados.admission_date}}</td>
+                    <td>{{empleados.pension_found}}</td>
+                    <td>{{empleados.eps}}</td>
+                    <td>{{empleados.phone}}</td>
+                    <td>{{empleados.compensations}}</td>
+                    <td>{{empleados.work_city}}</td>
+                    <td>{{empleados.gender}}</td>
+                    <td>{{empleados.blood}}</td>
+                    <td>{{empleados.factor}}</td>
+                    <td>{{empleados.job}}</td>
+                    <td><a class="button primary" href="{% url 'empleados_app:detail_empleado' empleados.id %}">Ver</a></td>
+                  </tr>
+                  {%endfor%}
+                </tbody>
+              </table>  
+        </div>
+        <div class="cell">
+          
+          {%if is_paginated%}
+          <nav aria-label="Pagination">
+
+            <ul class="pagination">
+              {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">Atras</a></li>
+              {%endif%}
+
+              {% for pagina in paginator.page_range %}
+              
+              
+              {% if  pagina == page_obj.number  %}
+                <li class="current"><span class="show-for-sr">You're on page</span> {{pagina}}</li>
+                
+                {%else%}
+                  <li><a href="?page={{pagina}}">{{pagina}}</a></li>
+              {% endif %}
+              {%endfor%}
+
+              
+                {% if page_obj.has_next%}
+                <li class="pagination-next"></li>
+                  <li><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+                </li>
+                {%endif%}
+              
+              
+
+            </ul>
+
+          </nav>
+          {%endif%}
+
+        </div>
+    </div>
+
+{%endblock content%}
