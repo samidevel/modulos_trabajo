@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from applications.users.mixins import UserCreatePermissionMixins
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import views as auth_views
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -11,7 +12,7 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseForbidden
 
 
-
+""""
 from django.contrib.auth.views import (
     PasswordChangeView, 
     PasswordResetView, 
@@ -19,12 +20,16 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetCompleteView,
 )
+"""
+
+from django.contrib.auth.views import PasswordChangeView
+
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 
 from django.core.mail import send_mail
 
 
-
+#Formularios del los auth
 from .forms import(
     UserRegisterForm,
     UserUpdateForm,
@@ -78,7 +83,7 @@ class Logout_View(View):
         logout(request)
         return HttpResponseRedirect(
             reverse(
-                'users_app:login_user'
+                'login_user'
             )
             
         )
@@ -145,22 +150,27 @@ class UserPasswordChange(PasswordChangeView):
         print(user)
         return super().post(request, *args, **kwargs)
     
-class UserPasswordReset(PasswordResetView):
+class PasswordResetView(FormView):
     template_name = 'users/password_reset.html'
     form_class = UserPasswordReset
     success_url = reverse_lazy('users_app:password_reset_done')
     
 
-class UserPasswordResetDone(PasswordResetDoneView):
+class PasswordResetDoneView(FormView):
     template_name = 'users/password_reset_done.html'
-    success_url = '.'
+    title = ("password modificado con exito")
+    
     
 
-class UserPasswordResetConfirm(PasswordResetConfirmView):
-    pass
-    #template_name = 'users/reset_confirm_email.html'
+class PasswordResetConfirmView(FormView):
+    template_name = 'users/reset_confirm_email.html'
+    form_class = PasswordResetConfirm
+    #send_mail()
+    success_url = reverse_lazy('password_reset_confirm')
     
 
+class PasswordCompleteView(FormView):
+    template_name = 'users/'
 
 class TurnosView(TemplateView):
     template_name = 'users/turnos_user.html'

@@ -17,19 +17,19 @@
           <li>
             <a href="#">Administrador</a>
             <ul class="menu vertical">
-              <li><a href="{% url 'users_app:list_users' %}">Listado de usuarios</a></li>
+              <li><a href="{% url 'list_users' %}">Listado de usuarios</a></li>
             </ul>
           </li>
           <li>
             <a href="#">Mi Perfil</a>
             <ul class="menu-vertical">
-              <li><a href="{% url 'users_app:change_password' %}">Cambiar contraseña</a></li>
-              <li><a href="{% url 'users_app:reset_password' %}">Restablecer contraseña</a></li>
-              <li><a href="{% url 'users_app:turnos_view' %}">Mis Turnos</a></li>
+              <li><a href="{% url 'change_password' %}">Cambiar contraseña</a></li>
+              <li><a href="{% url 'reset_password' %}">Restablecer contraseña</a></li>
+              <li><a href="{% url 'turnos_view' %}">Mis Turnos</a></li>
             </ul>
           </li>
          
-          <li><a href="{% url 'users_app:logout' %}">Cerrar session</a></li>
+          <li><a href="{% url 'logout' %}">Cerrar session</a></li>
          
          {%else%}
          
@@ -37,7 +37,7 @@
         
         {%endif%}
       </div>
-      <a class ="success  button" href="{% url 'users_app:login_user' %}">{{user}}</a>
+      <a class ="success  button" href="{% url 'login_user' %}">{{user}}</a>
       
     
       </div>
